@@ -1,18 +1,15 @@
 #include "LiquidCrystal.h"
 LiquidCrystal lcd(3, 2, A3, A2, A1, A0);
 
+int hapche = 0;
+
 int bizogama = 0;
 int waltrikom = 0;
 int siofor = 0;
 int apidra = 0;
 int tujeo = 0;
 int magneb6 = 0;
-char* list[]{"Bizogama: ", bizogama,
-             "Waltrikom: ", waltrikom,
-             "Siofor: ", siofor,
-             "Apidra: ", apidra,
-             "Tujeo: ", tujeo,
-             "Magne B6: ", magneb6};
+
 void setup() {
   pinMode(A0, OUTPUT);
   pinMode(A1, OUTPUT);
@@ -40,19 +37,109 @@ void loop() {
     lcd.print("All Pills: "); 
     lcd.setCursor(0, 1);
     lcd.print("b"+(String)bizogama+"w"+(String)waltrikom+"s"+(String)siofor+"a"+(String)apidra+"t"+(String)tujeo+"m"+(String)magneb6+"");
+    hapche = 0;
   } else if (value > 810 && value < 850) {    // button - right
-    lcd.clear();
-    lcd.print("Waltrikom: "+(String)waltrikom+"");    
+    if(hapche == 0){
+      bizogama++;
+      lcd.clear();
+      lcd.print("Bizogama: "+(String)bizogama+"");
+    }else if(hapche == 1){
+      waltrikom++;
+      lcd.clear();
+      lcd.print("Waltrikom: "+(String)waltrikom+"");
+    }else if(hapche == 2){
+      siofor++;
+      lcd.clear();
+      lcd.print("Siofor: "+(String)siofor+"");
+    }else if(hapche == 3){
+      apidra++;
+      lcd.clear();
+      lcd.print("Apidra: "+(String)apidra+"");
+    }else if(hapche == 4){
+      tujeo++;
+      lcd.clear();
+      lcd.print("Tujeo: "+(String)tujeo+"");
+    }else if(hapche == 5){
+      magneb6++;
+      lcd.clear();
+      lcd.print("Magne B6: "+(String)magneb6+"");
+    }     
   } else if (value > 740 && value < 810) {    // button - down
-    lcd.clear();
-    lcd.print("Bizogama: "+(String)bizogama+"");
-    bizogama++;
+    hapche++;
+    if(hapche == 0){
+      lcd.clear();
+      lcd.print("Bizogama: "+(String)bizogama+"");
+    }else if(hapche == 1){
+      lcd.clear();
+      lcd.print("Waltrikom: "+(String)waltrikom+"");
+    }else if(hapche == 2){
+      lcd.clear();
+      lcd.print("Siofor: "+(String)siofor+"");
+    }else if(hapche == 3){
+      lcd.clear();
+      lcd.print("Apidra: "+(String)apidra+"");
+    }else if(hapche == 4){
+      lcd.clear();
+      lcd.print("Tujeo: "+(String)tujeo+"");
+    }else if(hapche == 5){
+      lcd.clear();
+      lcd.print("Magne B6: "+(String)magneb6+"");
+    }else{
+      hapche = 0;
+      lcd.clear();
+      lcd.print("Bizogama: "+(String)bizogama+"");
+    }
   } else if (value > 600 && value < 740) {    // button - left
-    lcd.clear();
-    lcd.print("B2: "+(String)bizogama+"");
+    if(hapche == 0){
+      bizogama--;
+      lcd.clear();
+      lcd.print("Bizogama: "+(String)bizogama+"");
+    }else if(hapche == 1){
+      waltrikom--;
+      lcd.clear();
+      lcd.print("Waltrikom: "+(String)waltrikom+"");
+    }else if(hapche == 2){
+      siofor--;
+      lcd.clear();
+      lcd.print("Siofor: "+(String)siofor+"");
+    }else if(hapche == 3){
+      apidra--;
+      lcd.clear();
+      lcd.print("Apidra: "+(String)apidra+"");
+    }else if(hapche == 4){
+      tujeo--;
+      lcd.clear();
+      lcd.print("Tujeo: "+(String)tujeo+"");
+    }else if(hapche == 5){
+      magneb6--;
+      lcd.clear();
+      lcd.print("Magne B6: "+(String)magneb6+"");
+    }
   } else if (value > 450 && value < 600) {    // button - up
-    lcd.clear();
-    lcd.print("B3: "+(String)bizogama+""); 
+    hapche--;
+    if(hapche == 0){
+      lcd.clear();
+      lcd.print("Bizogama: "+(String)bizogama+"");
+    }else if(hapche == 1){
+      lcd.clear();
+      lcd.print("Waltrikom: "+(String)waltrikom+"");
+    }else if(hapche == 2){
+      lcd.clear();
+      lcd.print("Siofor: "+(String)siofor+"");
+    }else if(hapche == 3){
+      lcd.clear();
+      lcd.print("Apidra: "+(String)apidra+"");
+    }else if(hapche == 4){
+      lcd.clear();
+      lcd.print("Tujeo: "+(String)tujeo+"");
+    }else if(hapche == 5){
+      lcd.clear();
+      lcd.print("Magne B6: "+(String)magneb6+"");
+    }else{
+      hapche = 5;
+      lcd.clear();
+      lcd.print("Magne B6: "+(String)magneb6+"");
+    }
   } else if (value < 450) {   // button - reset
     lcd.clear();
     lcd.print("Reset");
